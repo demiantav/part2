@@ -1,0 +1,139 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "content": "HTML is easy",
+      "important": false
+    },
+    {
+      "id": 2,
+      "content": "Browser can execute only JavaScript",
+      "important": true
+    },
+    {
+      "id": 3,
+      "content": "GET and POST are the most important methods of HTTP protocol",
+      "important": true
+    },
+    {
+      "id": 4,
+      "content": "Dios mio",
+      "important": false
+    },
+    {
+      "content": "que acelga",
+      "important": true,
+      "id": 5
+    },
+    {
+      "content": "si che",
+      "important": true,
+      "id": 6
+    },
+    {
+      "content": "fuuuuutbol",
+      "important": true,
+      "id": 7
+    },
+    {
+      "content": "me gusta la pizza",
+      "important": true,
+      "id": 8
+    },
+    {
+      "content": "hoy",
+      "important": false,
+      "id": 9
+    },
+    {
+      "content": "casi",
+      "important": false,
+      "id": 10
+    },
+    {
+      "content": "pipo",
+      "important": true,
+      "id": 11
+    },
+    {
+      "content": "si",
+      "important": false,
+      "id": 12
+    },
+    {
+      "content": "no lo se, capaz ahora funciona",
+      "important": true,
+      "id": 13
+    },
+    {
+      "content": "ahora si",
+      "important": false,
+      "id": 14
+    },
+    {
+      "content": "bueno",
+      "important": false,
+      "id": 15
+    },
+    {
+      "content": "tal vez",
+      "important": false,
+      "id": 16
+    },
+    {
+      "content": "hola",
+      "important": true,
+      "id": 17
+    },
+    {
+      "content": "no",
+      "important": true,
+      "id": 18
+    },
+    {
+      "content": "re bien che",
+      "important": false,
+      "id": 19
+    },
+    {
+      "content": "pibe",
+      "important": true,
+      "id": 20
+    },
+    {
+      "content": "no",
+      "important": true,
+      "id": 21
+    },
+    {
+      "content": "a veces gano",
+      "important": false,
+      "id": 22
+    },
+    {
+      "content": "kiko",
+      "important": true,
+      "id": 23
+    },
+    {
+      "content": "pe",
+      "important": false,
+      "id": 24
+    },
+    {
+      "content": "cuanto falta",
+      "important": false,
+      "id": 25
+    },
+    {
+      "content": "oi",
+      "important": false,
+      "id": 26
+    },
+    {
+      "content": "hoy me hice el preocupacional",
+      "important": false,
+      "id": 28
+    }
+  ]
+}
