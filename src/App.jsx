@@ -1,16 +1,20 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect, useRef } from 'react';
+
 import Note from './components/Note';
 import noteService from './services/notes';
 import Notification from './components/Notification';
 import Footer from './components/Footer';
+import Togglable from './components/Togglable';
+import LoginForm from './components/LoginForm';
+import NoteForm from './components/NoteForm';
 import loginService from './services/login';
 
 const App = () => {
+  const noteFormRef = useRef();
+
   //States
 
   const [notes, setNotes] = useState([]);
-  const [newNote, setNewNote] = useState('');
   const [showAll, setShowAll] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [username, setUsername] = useState('');
@@ -28,26 +32,12 @@ const App = () => {
   };
 
   //POST
-  const addNote = (event) => {
-    event.preventDefault();
-
-    const noteObject = {
-      content: newNote,
-      important: Math.random() < 0.5,
-      id: notes.length + 1,
-    };
-
+  const addNote = (noteObject) => {
+    noteFormRef.current.toggleVisibility();
     noteService.create(noteObject).then((returnedNote) => {
       console.log(returnedNote);
       setNotes(notes.concat(returnedNote));
-      setNewNote('');
     });
-  };
-
-  const handleNoteChange = (event) => {
-    console.log(event);
-    console.log(event.target.value);
-    setNewNote(event.target.value);
   };
 
   const toggleImportanceOf = (id) => {
@@ -64,7 +54,7 @@ const App = () => {
       .then((returnedNote) => {
         setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)));
       })
-      .catch((error) => {
+      .catch(() => {
         setErrorMessage(`Note '${note.content}' was already removed from server`);
         setTimeout(() => {
           setErrorMessage(null);
@@ -80,6 +70,15 @@ const App = () => {
 
   useEffect(get, []); //GET
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+      noteService.setToken(user.token);
+    }
+  }, []);
+
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -88,6 +87,8 @@ const App = () => {
         username,
         password,
       });
+      window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user));
+      noteService.setToken(user.token);
       setUser(user);
       setUsername('');
       setPassword('');
@@ -99,34 +100,30 @@ const App = () => {
     }
   };
 
-  const loginForm = () => (
-    <form onSubmit={handleLogin}>
-      <div>
-        username
-        <input type="text" value={username} name="Username" onChange={({ target }) => setUsername(target.value)} />
-      </div>
-      <div>
-        password
-        <input type="password" value={password} name="Password" onChange={({ target }) => setPassword(target.value)} />
-      </div>
-      <button type="submit">login</button>
-    </form>
-  );
-
-  const noteForm = () => (
-    <form onSubmit={addNote}>
-      <input value={newNote} onChange={handleNoteChange} />
-      <button type="submit">save</button>
-    </form>
-  );
-
   return (
     <div>
       <h1>Notes</h1>
       <Notification message={errorMessage} />
 
-      {user === null && loginForm()}
-      {user !== null && noteForm()}
+      {!user && (
+        <Togglable buttonLabel="login">
+          <LoginForm
+            username={username}
+            password={password}
+            handleUsernameChange={({ target }) => setUsername(target.value)}
+            handlePasswordChange={({ target }) => setPassword(target.value)}
+            handleSubmit={handleLogin}
+          />
+        </Togglable>
+      )}
+      {user && (
+        <div>
+          <p>{user.name} logged in</p>
+          <Togglable buttonLabel="new note" ref={noteFormRef}>
+            <NoteForm createNote={addNote} />
+          </Togglable>
+        </div>
+      )}
 
       <div>
         <button onClick={() => setShowAll(!showAll)}>show {showAll ? 'important' : 'all'}</button>
