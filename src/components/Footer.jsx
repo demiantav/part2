@@ -1,15 +1,18 @@
 const Footer = () => {
-    const footerStyle = {
-      color: 'green',
-      fontStyle: 'italic',
-      fontSize: 16
-    }
-    return (
-      <div style={footerStyle}>
-        <br />
-        <em>Note app, Department of Computer Science, University of Helsinki 2023</em>
-      </div>
-    )
-  }
+  const footerStyle = {
+    color: 'green',
+    fontStyle: 'italic',
+    fontSize: 16,
+  };
 
-  export default Footer
+  const actualYear = new Date().getFullYear();
+
+  return (
+    <div style={footerStyle}>
+      <br />
+      <em>Note app, Department of Computer Science, University of Helsinki {actualYear}</em>
+    </div>
+  );
+};
+
+export default Footer;
