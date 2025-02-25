@@ -27,6 +27,13 @@ import {
   useMatch
 } from "react-router-dom"
 
+import styled from 'styled-components'
+
+const DivButton = styled.button`
+background-color: blue;
+margin: 2rem;
+`
+
 
 const Home = () => (
   <div>
@@ -191,6 +198,7 @@ const App = () => {
       <div>
         <br />
         <em>Note app, Department of Computer Science 2022</em>
+        <DivButton>Hola boton styled component</DivButton>
       </div>
     </Container>
   )
